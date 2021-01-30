@@ -9,9 +9,9 @@ public class ArmorCloth extends Armor {
     private static int upDext =1;
     private static int upIntg=2;
 
-    public ArmorCloth() {
+    public ArmorCloth(String placement) {
 
-        super( "Cloth",10, 0, 1, 3,upHp,upStr,upDext,upIntg);
+        super( "Cloth",placement,10, 0, 1, 3,upHp,upStr,upDext,upIntg);
 
     }
 

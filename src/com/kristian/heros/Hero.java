@@ -5,8 +5,6 @@ public class Hero implements  HeroInterface{
 
 
     String heroType;
-
-
     int hp;
     int strength;
     int dexterity;
@@ -18,18 +16,25 @@ public class Hero implements  HeroInterface{
     int upDext;
     int upIntg;
 
+
+
+    int xp=0;
+    int xpNext=100;
+
+
     public Hero(String heroType, int hp, int strength, int dexterity, int intelligence, int upHp, int upStr, int upDext, int upIntg) {
         this.heroType=heroType;
         this.hp = hp;
         this.strength = strength;
         this.dexterity = dexterity;
         this.intelligence = intelligence;
-        this.level = 1;
+        this.level=1;
         /*bonus parameters*/
         this.upHp=upHp;
         this.upStr=upStr;
-        this.upDext=upStr;
-        this.upIntg=upStr;
+        this.upDext=upDext;
+        this.upIntg=upIntg;
+
     }
 
     public String getHeroType() {
@@ -91,19 +96,42 @@ public class Hero implements  HeroInterface{
     public int getUpIntg() {
         return upIntg;
     }
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int xp) {
+        this.xp += xp;
+    }
 
     @Override
-    public void levelUp() {
-        setLevel(level+1);
-        setHp(hp+getUpHp());
-        setDexterity(dexterity+getUpDext());
-        setStrength(strength+getUpStr());
-        setIntelligence(intelligence+getIntelligence());
+    public void levelUp(int lvlUp) {
+
+        setLevel( level+=lvlUp );
+
+        setHp( getHp()+getUpHp()*(getLevel()-1) );
+        setDexterity( getDexterity()+getUpDext()*(getLevel()-1) );
+        setStrength( getStrength()+getUpStr()*(getLevel()-1));
+        setIntelligence(getIntelligence()+getUpIntg()*(getLevel()-1));
 
     }
 
     @Override
-    public void addXP() {
+    public void addXP(int newXP) {
+    /** Lets XP up this hero
+     * */
+        if(newXP>=xpNext){
+
+            int newLvl = newXP/100;
+            levelUp(newLvl);
+
+
+        }else{
+            System.out.println("tjuppelup");
+            setXp(newXP);
+
+        }
+
 
     }
 
