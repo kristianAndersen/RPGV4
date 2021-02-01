@@ -2,6 +2,7 @@ package com.kristian.prettyPrint;
 
 import com.kristian.heros.Hero;
 import com.kristian.armors.Armor;
+import com.kristian.weapons.Weapon;
 
 public class PrettyPrint {
 
@@ -29,7 +30,7 @@ public class PrettyPrint {
       int intg=heroInfo.getIntelligence();
       int level=heroInfo.getLevel();
       int xp=heroInfo.getXp();
-
+      int attack=heroInfo.attack();
   
          System.out.printf("%-1s %-20s %-1s","┌","────────────────────","┐\n");
          System.out.printf("%-1s %-20s %-1s","│","      "+kind+"      ","│\n");
@@ -41,17 +42,17 @@ public class PrettyPrint {
          System.out.printf("%-1s %-20s %-1s","│"," Lvl: "+level+"     ","│\n");
          System.out.printf("%-1s %-20s %-1s","│"," XP: "+xp+"         ","│\n");
          System.out.printf("%-1s %-20s %-1s","└","────────────────────","┘\n");
-         
+
          
      }
 
     public static void printArmor(Armor armorInfo) {
 
         String kind = armorInfo.getArmorType();
-        int hp = armorInfo.getBonusHP();
-        int str = armorInfo.getBonusStr();
-        int dext = armorInfo.getBonusDext();
-        int intg = armorInfo.getBonusInth();
+        int hp = armorInfo.getArmorBonusHP();
+        int str = armorInfo.getArmorBonusStr();
+        int dext = armorInfo.getArmorBonusDext();
+        int intg = armorInfo.getArmorBonusIntg();
         int level = armorInfo.getLevel();
 
 
@@ -65,11 +66,38 @@ public class PrettyPrint {
         if (str!=0){
             System.out.printf("%-1s %-20s %-1s", "│", " Bonus Str: " + str + " ", "│\n");
         }
-        System.out.printf("%-1s %-20s %-1s","│"," Bonus Dex: "+dext+"","│\n");
-        System.out.printf("%-1s %-20s %-1s","│"," Bonus Int: "+intg+"","│\n");
+        if (dext!=0) {
+            System.out.printf("%-1s %-20s %-1s", "│", " Bonus Dex: " + dext + "", "│\n");
+        }
+        if (intg!=0) {
+            System.out.printf("%-1s %-20s %-1s", "│", " Bonus Int: " + intg + "", "│\n");
+        }
         System.out.printf("%-1s %-20s %-1s","└","────────────────────","┘\n");
 
 
     }
+    public static void printWeapon(Weapon weaponInfo) {
+
+        String kind = weaponInfo.getWeaponName();
+        String wpt = weaponInfo.getWeaponType();
+        int level = weaponInfo.getWeaponLevel();
+        int Dmg = weaponInfo.getTotalDamage();
+
+
+
+
+        System.out.printf("%-1s %-20s %-1s", "┌", "────────────────────", "┐\n");
+        System.out.printf("%-1s %-20s %-1s", "│", "  "+kind+"      ", "│\n");
+        System.out.printf("%-1s %-20s %-1s", "│", "────────────────────", "│\n");
+        System.out.printf("%-1s %-20s %-1s", "│", " Weapon type: " + wpt + "", "│\n");
+        System.out.printf("%-1s %-20s %-1s", "│", " Weapon level: " + level + "   ", "│\n");
+        System.out.printf("%-1s %-20s %-1s","│"," Damage: "+Dmg+"","│\n");
+        System.out.printf("%-1s %-20s %-1s","└","────────────────────","┘\n");
+
+
+    }
+
+
+
     
 }

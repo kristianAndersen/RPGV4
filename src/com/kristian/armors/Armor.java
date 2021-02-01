@@ -1,7 +1,5 @@
 package com.kristian.armors;
 
-import java.util.Locale;
-
 public class Armor implements ArmorInterface{
 
     String armorType;
@@ -12,10 +10,10 @@ public class Armor implements ArmorInterface{
     int intelligence;
     int level;
 
-    int upHp;
-    int upStr;
-    int upDext;
-    int upIntg;
+    int upGradeHp;
+    int upGradeStr;
+    int upGradeDext;
+    int upGradeIntg;
 
 
     public Armor(String armorType,String placement, int hp, int strength, int dexterity, int intelligence, int upHp, int upStr, int upDext, int upIntg) {
@@ -27,10 +25,10 @@ public class Armor implements ArmorInterface{
         this.intelligence = intelligence;
         this.level = 1;
         /*bonus parameters*/
-        this.upHp=upHp;
-        this.upStr=upStr;
-        this.upDext=upDext;
-        this.upIntg=upIntg;
+        this.upGradeHp =upHp;
+        this.upGradeStr =upStr;
+        this.upGradeDext =upDext;
+        this.upGradeIntg =upIntg;
     }
 
     public String getArmorType() {
@@ -77,56 +75,58 @@ public class Armor implements ArmorInterface{
         this.level = level;
     }
 
-    public int getUpHp() {
-        return upHp;
+    public int getUpGradeHp() {
+        return upGradeHp;
     }
 
-    public int getUpStr() {
-        return upStr;
+    public int getUpGradeStr() {
+        return upGradeStr;
     }
 
-    public int getUpDext() {
-        return upDext;
+    public int getUpGradeDext() {
+        return upGradeDext;
     }
 
-    public int getUpIntg() {
-        return upIntg;
+    public int getUpGradeIntg() {
+        return upGradeIntg;
+    }
+
+    public String getPlacement() {
+        return placement;
     }
 
     @Override
-    public void levelUp(int lvlUp) {
+    public void levelUpArmor(int lvlUp) {
         setLevel(getLevel()+lvlUp);
     }
 
     @Override
-    public int getBonusHP() {
-        return calcLevelUp(hp+getUpHp()*level);
-
+    public int getArmorBonusHP() {
+        return calculateArmorPlacement(hp+ getUpGradeHp()*level);
     }
 
     @Override
-    public int getBonusDext() {
-        return calcLevelUp(dexterity+getUpDext()*level);
+    public int getArmorBonusDext() {
+        return calculateArmorPlacement(dexterity+ getUpGradeDext()*level);
     }
 
     @Override
-    public int getBonusInth() {
-        return calcLevelUp(intelligence+getUpIntg()*level);
+    public int getArmorBonusIntg() {
+        return calculateArmorPlacement(intelligence+ getUpGradeIntg()*level);
     }
 
     @Override
-    public int getBonusStr() {
-        return calcLevelUp(strength+getUpStr()*level);
+    public int getArmorBonusStr() {
+        return calculateArmorPlacement(strength+ getUpGradeStr()*level);
     }
 /**
  * calculate armor bonus on placement */
     @Override
-    public int calcLevelUp(int intToCalc) {
+    public int calculateArmorPlacement(int intToCalc) {
         float calculatedInt;
 
         switch (placement.toLowerCase()){
             case "body" :
-                System.out.println("Body you ....");
                 calculatedInt =  (int)( intToCalc *(100.0f/100.0f));
                 break;
             case "head" :
@@ -138,8 +138,6 @@ public class Armor implements ArmorInterface{
             default:
                 throw new IllegalStateException("Unexpected value: " + placement);
         }
-
-
         return Math.round(calculatedInt);
     }
 }

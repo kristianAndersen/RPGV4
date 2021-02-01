@@ -9,6 +9,7 @@ public class HeroWarrior extends Hero{
     private static int upDext =2;
     private static int upIntg=1;
 
+
     public HeroWarrior() {
 
 

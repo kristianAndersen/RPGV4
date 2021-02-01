@@ -1,5 +1,8 @@
 package com.kristian.heros;
 
+import com.kristian.armors.Armor;
+import com.kristian.weapons.Weapon;
+
 public class Hero implements  HeroInterface{
 
 
@@ -10,7 +13,8 @@ public class Hero implements  HeroInterface{
     int dexterity;
     int intelligence;
     int level;
-
+    Weapon weapon;
+    Armor Armor;
     int upHp;
     int upStr;
     int upDext;
@@ -20,7 +24,11 @@ public class Hero implements  HeroInterface{
 
     int xp=0;
     int xpNext=100;
+    int heroAmplifyer;
 
+
+    int heroDamage;
+    int damageToDeal;
 
     public Hero(String heroType, int hp, int strength, int dexterity, int intelligence, int upHp, int upStr, int upDext, int upIntg) {
         this.heroType=heroType;
@@ -38,70 +46,95 @@ public class Hero implements  HeroInterface{
     }
 
     public String getHeroType() {
+
         return heroType;
     }
 
     public int getHp() {
+
         return hp;
     }
 
     public void setHp(int hp) {
+
         this.hp = hp;
     }
 
     public int getStrength() {
+
         return strength;
     }
 
     public void setStrength(int strength) {
+
         this.strength = strength;
     }
 
     public int getDexterity() {
+
         return dexterity;
     }
 
     public void setDexterity(int dexterity) {
+
         this.dexterity = dexterity;
     }
 
     public int getIntelligence() {
+
         return intelligence;
     }
 
     public void setIntelligence(int intelligence) {
+
         this.intelligence = intelligence;
     }
 
     public int getLevel() {
+
         return level;
     }
 
     public void setLevel(int level) {
+
         this.level = level;
     }
 
     public int getUpHp() {
+
         return upHp;
     }
 
     public int getUpStr() {
+
         return upStr;
     }
 
     public int getUpDext() {
+
         return upDext;
     }
 
     public int getUpIntg() {
+
         return upIntg;
     }
     public int getXp() {
+
         return xp;
     }
 
     public void setXp(int xp) {
+
         this.xp += xp;
+    }
+
+    public int getHeroDamage() {
+        return heroDamage;
+    }
+
+    public void setHeroDamage(int heroDamage) {
+        this.heroDamage = heroDamage;
     }
 
     @Override
@@ -118,8 +151,7 @@ public class Hero implements  HeroInterface{
 
     @Override
     public void addXP(int newXP) {
-    /** Lets XP up this hero
-     * */
+
         if(newXP>=xpNext){
 
             int newLvl = newXP/100;
@@ -136,13 +168,67 @@ public class Hero implements  HeroInterface{
     }
 
     @Override
-    public void addWeapon() {
+    public void addWeapon(Weapon weapon) {
+
+        /**reset weapon damage if weapon already exist*/
+        if(this.weapon!=null){
+            damageToDeal-= (int) Math.round(this.weapon.getDamage()+(heroAmplifyer * this.weapon.getDamageAmplifyer()));
+        }
+        this.weapon=weapon;
+        calculateWeapon();
+
+    }
+    public void calculateWeapon(){
+
+        String wType= weapon.getWeaponType();
+
+        switch (wType){
+            case "Melee":
+                heroAmplifyer=getStrength();
+                break;
+            case "Ranged":
+                heroAmplifyer=getDexterity();
+                break;
+            case "magic":
+                heroAmplifyer=getIntelligence();
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + wType);
+        }
+
+        damageToDeal= (int) Math.round(weapon.getDamage()+(heroAmplifyer * weapon.getDamageAmplifyer()));
+        System.out.println("Equipping Hero with "+weapon.getWeaponType()+" "+damageToDeal);
+    }
+
+
+
+
+
+    @Override
+    public int attack() {
+
+        return damageToDeal;
 
     }
 
     @Override
-    public void addArmor() {
-
+    public void addArmor(Armor armor) {
+    /*if our hero has armor in an already filled slot then remove it**/
+        if(this.Armor!=null && this.Armor.getPlacement()==armor.getPlacement()){
+            System.out.println("New armor up");
+            setHp(hp-this.Armor.getHp());
+            setStrength(strength-this.Armor.getStrength());
+            setDexterity(dexterity-this.Armor.getDexterity());
+            setIntelligence(intelligence-this.Armor.getIntelligence());
+        }
+        this.Armor=armor;
+        setHp(hp+=armor.getHp());
+        setStrength(strength+=armor.getStrength());
+        setDexterity(dexterity+=armor.getDexterity());
+        setIntelligence(intelligence+=armor.getIntelligence());
     }
+
+
+
 
 }
