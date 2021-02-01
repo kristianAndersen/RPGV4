@@ -1,10 +1,11 @@
 package com.kristian.armors;
 
 public interface ArmorInterface {
-    public void levelUpArmor(int lvlUp);
-    public int getArmorBonusHP();
-    public int getArmorBonusDext();
-    public int getArmorBonusIntg();
-    public int getArmorBonusStr();
+
+    void levelUpArmor(int lvlUp);
+    int getArmorBonusHP();
+    int getArmorBonusDext();
+    int getArmorBonusIntg();
+    int getArmorBonusStr();
     int calculateArmorPlacement(int intToCalc);
 }

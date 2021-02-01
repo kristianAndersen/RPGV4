@@ -6,6 +6,10 @@ public class Armor implements ArmorInterface{
     String placement;
     int hp;
     int strength;
+
+
+
+    int baseStrength;
     int dexterity;
     int intelligence;
     int level;
@@ -20,6 +24,7 @@ public class Armor implements ArmorInterface{
         this.armorType=armorType;
         this.placement=placement;
         this.hp = hp;
+        this.baseStrength=strength;
         this.strength = strength;
         this.dexterity = dexterity;
         this.intelligence = intelligence;
@@ -35,89 +40,97 @@ public class Armor implements ArmorInterface{
         return armorType;
     }
 
-    public int getHp() {
-        return hp;
+    public int getArmorHp() {
+        return calculateArmorPlacement(hp);
     }
 
-    public void setHp(int hp) {
-        this.hp = hp;
+    public void setArmorHp(int hp) {
+        this.hp = calculateArmorPlacement(hp);
+    }
+    public int getBaseStrength() {
+        return baseStrength;
     }
 
-    public int getStrength() {
-        return strength;
+    public int getArmorStrength() {
+        return calculateArmorPlacement(strength);
     }
 
-    public void setStrength(int strength) {
-        this.strength = strength;
+    public void setArmorStrength(int strength) {
+        this.strength = calculateArmorPlacement(strength);
     }
 
-    public int getDexterity() {
-        return dexterity;
+    public int getArmorDexterity() {
+        return calculateArmorPlacement(dexterity);
     }
 
-    public void setDexterity(int dexterity) {
-        this.dexterity = dexterity;
+    public void setArmorDexterity(int dexterity) {
+        this.dexterity = calculateArmorPlacement(dexterity);
     }
 
-    public int getIntelligence() {
-        return intelligence;
+    public int getArmorIntelligence() {
+        return calculateArmorPlacement(intelligence);
     }
 
-    public void setIntelligence(int intelligence) {
-        this.intelligence = intelligence;
+    public void setArmorIntelligence(int intelligence) {
+        this.intelligence = calculateArmorPlacement(intelligence);
     }
 
-    public int getLevel() {
+    public int getArmorLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setArmorLevel(int level) {
         this.level = level;
     }
 
-    public int getUpGradeHp() {
+    public int getArmorUpGradeHp() {
         return upGradeHp;
     }
 
-    public int getUpGradeStr() {
+    public int getArmorUpGradeStr() {
         return upGradeStr;
     }
 
-    public int getUpGradeDext() {
+    public int getArmorUpGradeDext() {
         return upGradeDext;
     }
 
-    public int getUpGradeIntg() {
+    public int getArmorUpGradeIntg() {
         return upGradeIntg;
     }
 
-    public String getPlacement() {
+    public String getArmorPlacement() {
         return placement;
     }
 
     @Override
     public void levelUpArmor(int lvlUp) {
-        setLevel(getLevel()+lvlUp);
+
+        setArmorLevel(getArmorLevel()+lvlUp);
+        setArmorHp(getArmorBonusHP());
+        setArmorStrength(getArmorBonusStr());
+        setArmorDexterity(getArmorBonusDext());
+        setArmorIntelligence(getArmorBonusIntg());
     }
 
     @Override
     public int getArmorBonusHP() {
-        return calculateArmorPlacement(hp+ getUpGradeHp()*level);
+        return hp+= getArmorUpGradeHp()*level;
     }
 
     @Override
     public int getArmorBonusDext() {
-        return calculateArmorPlacement(dexterity+ getUpGradeDext()*level);
+        return dexterity+= getArmorUpGradeDext()*level;
     }
 
     @Override
     public int getArmorBonusIntg() {
-        return calculateArmorPlacement(intelligence+ getUpGradeIntg()*level);
+        return intelligence+= getArmorUpGradeIntg()*level;
     }
 
     @Override
     public int getArmorBonusStr() {
-        return calculateArmorPlacement(strength+ getUpGradeStr()*level);
+        return strength+= getArmorUpGradeStr()*level;
     }
 /**
  * calculate armor bonus on placement */
@@ -138,6 +151,7 @@ public class Armor implements ArmorInterface{
             default:
                 throw new IllegalStateException("Unexpected value: " + placement);
         }
+
         return Math.round(calculatedInt);
     }
 }

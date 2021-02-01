@@ -24,37 +24,33 @@ public class PrettyPrint {
     public static void printHero(Hero heroInfo) {
 
       String kind=heroInfo.getHeroType();
-      int hp =heroInfo.getHp();
-      int str = heroInfo.getStrength();
-      int dext=heroInfo.getDexterity();
-      int intg=heroInfo.getIntelligence();
-      int level=heroInfo.getLevel();
-      int xp=heroInfo.getXp();
-      int attack=heroInfo.attack();
-  
-         System.out.printf("%-1s %-20s %-1s","┌","────────────────────","┐\n");
-         System.out.printf("%-1s %-20s %-1s","│","      "+kind+"      ","│\n");
-         System.out.printf("%-1s %-20s %-1s","│","────────────────────","│\n");
-         System.out.printf("%-1s %-20s %-1s","│"," HP: "+hp+"         ","│\n");
-         System.out.printf("%-1s %-20s %-1s","│"," Str: "+str+"       ","│\n");
-         System.out.printf("%-1s %-20s %-1s","│"," Dex: "+dext+"      ","│\n");
-         System.out.printf("%-1s %-20s %-1s","│"," Int: "+intg+"      ","│\n");
-         System.out.printf("%-1s %-20s %-1s","│"," Lvl: "+level+"     ","│\n");
-         System.out.printf("%-1s %-20s %-1s","│"," XP: "+xp+"         ","│\n");
-         System.out.printf("%-1s %-20s %-1s","└","────────────────────","┘\n");
+      int hp =heroInfo.getHeroHp();
+      int str = heroInfo.getHeroStrength();
+      int dext=heroInfo.getHeroDexterity();
+      int intg=heroInfo.getHeroIntelligence();
+      int level=heroInfo.getHeroLevel();
+      int xp=heroInfo.getHeroXp();
+      int attack=heroInfo.heroAttack();
 
-         
+        System.out.printf("%1s %20s %1s%n","┌","─────────────────────────────────────────","┐");
+        System.out.printf("%1s %-9s%n %9s %8s %8s %-8s%n %8s %8s%n"," ",kind,"HP: "+hp ,"Str: "+str, "Dex: "+dext, "Int: "+intg,"Lvl: "+level,"XP to next: "+xp);
+        if(attack!=0){
+            System.out.printf("%1s %20s %1s%n","┌","─────────────────────────────────────────","┐");
+            System.out.printf("%1s %-1s %5s %-1s%n"," ","***",""+kind+" Attack "+attack+"","***");
+        }
+        System.out.printf("%1s %20s %1s%n","└","─────────────────────────────────────────","┘");
+
+
      }
 
     public static void printArmor(Armor armorInfo) {
 
         String kind = armorInfo.getArmorType();
-        int hp = armorInfo.getArmorBonusHP();
-        int str = armorInfo.getArmorBonusStr();
-        int dext = armorInfo.getArmorBonusDext();
-        int intg = armorInfo.getArmorBonusIntg();
-        int level = armorInfo.getLevel();
-
+        int hp = armorInfo.getArmorHp();
+        int str = armorInfo.getArmorStrength();
+        int dext = armorInfo.getArmorDexterity();
+        int intg = armorInfo.getArmorIntelligence();
+        int level = armorInfo.getArmorLevel();
 
         System.out.printf("%-1s %-20s %-1s", "┌", "────────────────────", "┐\n");
         System.out.printf("%-1s %-20s %-1s", "│", "      " + kind + "      ", "│\n");
@@ -86,13 +82,13 @@ public class PrettyPrint {
 
 
 
-        System.out.printf("%-1s %-20s %-1s", "┌", "────────────────────", "┐\n");
-        System.out.printf("%-1s %-20s %-1s", "│", "  "+kind+"      ", "│\n");
-        System.out.printf("%-1s %-20s %-1s", "│", "────────────────────", "│\n");
-        System.out.printf("%-1s %-20s %-1s", "│", " Weapon type: " + wpt + "", "│\n");
-        System.out.printf("%-1s %-20s %-1s", "│", " Weapon level: " + level + "   ", "│\n");
-        System.out.printf("%-1s %-20s %-1s","│"," Damage: "+Dmg+"","│\n");
-        System.out.printf("%-1s %-20s %-1s","└","────────────────────","┘\n");
+        System.out.printf("%-1s %-25s %-1s", "┌","─────────────────────────", "┐\n");
+        System.out.printf("%-1s %-25s %-1s", "│"," "+kind+"", "│\n");
+        System.out.printf("%-1s %-25s %-1s", "│","─────────────────────────", "│\n");
+        System.out.printf("%-1s %-25s %-1s", "│"," Weapon type: " + wpt + "", "│\n");
+        System.out.printf("%-1s %-25s %-1s", "│"," Weapon level: " + level + "   ", "│\n");
+        System.out.printf("%-1s %-25s %-1s","│"," Damage: "+Dmg+"","│\n");
+        System.out.printf("%-1s %-25s %-1s","└","─────────────────────────","┘\n");
 
 
     }
