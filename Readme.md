@@ -6,11 +6,12 @@
 
 - Project Goals
 - Requirements and Expectations
-
+- Screenshots
 
 ---
 ### Project Goals ### 
-The goal of this project is to choose a suitable design patters for the given task of creating an RPG character system** .
+**The goal of this project is to choose a suitable design patters for the given task of creating an 
+RPG character system** .
 
 ---
 ### Requirements and Expectations ### 
@@ -26,6 +27,9 @@ The goal of this project is to choose a suitable design patters for the given ta
    - Show that characters stats changes depending on armor item 
 - Show attacking damage of a character 
    - only amount of damage    
-    
 
+**Screenshots**
+![hero](assets/basic-heros.png)
+*Heroes leveled up*
+![hero](assets/leveled-up-heros.png)
 
