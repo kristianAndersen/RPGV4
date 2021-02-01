@@ -32,8 +32,8 @@ RPG character system** .
 - Show attacking damage of a character
     - only amount of damage
 
-**Screenshots**
-![hero](assets/basic-heros.png)
-*Heroes leveled up*
+**Screenshots**\
+![hero](assets/basic-heros.png)\
+*Heroes leveled up*\
 ![hero](assets/leveled-up-heros.png)
 
