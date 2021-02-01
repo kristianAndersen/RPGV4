@@ -10,7 +10,7 @@
 
 ---
 ### Project Goals ### 
-The goal of this project is to choose a suitable design patters for the given task of creating an RPG character system** .
+**The goal of this project is to choose a suitable design patters for the given task of creating an RPG character system** .
 
 ---
 ### Requirements and Expectations ### 
