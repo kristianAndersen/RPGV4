@@ -83,6 +83,13 @@ public class Main {
         pp.printWeapon(magic);
         pp.printHero(warrior);
 
+        System.out.println("level up Equipment and Ranger");
+        ranger.heroAddXP(5);
+        ranger.heroAddWeapon(magic);
+        ranger.heroAddArmor(plate);
+        pp.printHero(ranger);
+
+
     }
 
 }
